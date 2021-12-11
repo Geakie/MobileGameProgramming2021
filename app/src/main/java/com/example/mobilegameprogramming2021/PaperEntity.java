@@ -56,7 +56,7 @@ public class PaperEntity implements EntityBase{
     @Override
     public void Render(Canvas _canvas) {
         //wk 8=>draw sprite using xpos,ypos, must cast in int
-        spritepaper.Render(_canvas, (int)120, (int)300);
+        spritepaper.Render(_canvas, (int)140, (int)300);
     }
 
     @Override
