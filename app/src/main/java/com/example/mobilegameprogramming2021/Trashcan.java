@@ -91,7 +91,24 @@ public class Trashcan implements EntityBase{
         return result;
     }
 
+    public float getPosX()
+    {
+        return xPos;
+    }
 
+    public float GetPosY()
+    {
+        return yPos;
+    }
+
+
+    public void onHit(Collidable _other)
+    {
+        if (_other.GetType() == "PaperEntity")
+        {
+            // SetisDone
+        }
+    }
 
 
 }

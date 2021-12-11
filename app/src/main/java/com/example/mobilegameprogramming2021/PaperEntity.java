@@ -2,16 +2,19 @@ package com.example.mobilegameprogramming2021;
 
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
+import android.util.DisplayMetrics;
 import android.view.Display;
 import android.view.SurfaceView;
 import java.util.Random;
 
 public class PaperEntity implements EntityBase{
-    public int speed = 20;
     private boolean isDone = false;
-    private int screenX, screenY;
-    private float width,height;
-    int x,y;
+    int ScreenWidth, ScreenHeight;
+    private float yStart = 0,xPos = 0,yPos = 0, offset;
+    private float speed;
+    Random ranGen;
+    private SurfaceView view = null;
+    DisplayMetrics metrics;
     private Sprite spritepaper = null;   // New on Week 8
     private float screenRatioX,screenRatioY;
 
@@ -32,10 +35,15 @@ public class PaperEntity implements EntityBase{
         //week 8 => create new sprite instance
         spritepaper = new Sprite(ResourceManager.Instance.GetBitmap(R.drawable.paper),1,3, 1 );
 
-        width = spritepaper.GetWidth();
-        height = spritepaper.GetHeight();
+        // Randomize a location to spawn, Y is fixed, x is random
+        Random ranGen = new Random();
+        yStart = yPos = 0;
+        ScreenWidth = _view.getWidth();
+        xPos = 540;
+        //xPos = ranGen.nextInt() * _view.getWidth();
 
-
+      // Set a speed to cross the screen
+        speed = _view.getWidth() * 0.2f;
 
         //week 8=>randomise position
         //xPos = ranGen.nextFloat() * _view.getWidth();
@@ -50,13 +58,25 @@ public class PaperEntity implements EntityBase{
         // wk8=> update sprite animation frame based on timing
         spritepaper.Update(_dt);
 
+        yPos += speed * _dt;
+        // Check if out of the screen;
+        //if (yPos >= -spritepaper.GetHeight() * 0.3f)
+       //{
+            // Move it to another Location
+       //     yPos = yStart;
+
+        //}
+
+        // Check Collision with Player
+        //if (Collision.SphereToSphere(xPos,yPos, spritepaper.GetWidth() * 0.5f,GameSystem.Instance.))
+
     }
 
 
     @Override
     public void Render(Canvas _canvas) {
         //wk 8=>draw sprite using xpos,ypos, must cast in int
-        spritepaper.Render(_canvas, (int)140, (int)300);
+        spritepaper.Render(_canvas, (int)xPos, (int)yPos);
     }
 
     @Override
