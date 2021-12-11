@@ -37,10 +37,10 @@ public class PaperEntity implements EntityBase{
 
         // Randomize a location to spawn, Y is fixed, x is random
         Random ranGen = new Random();
-        yStart = yPos = 0;
+        yStart = yPos = 500;
         ScreenWidth = _view.getWidth();
-        xPos = 540;
-        //xPos = ranGen.nextInt() * _view.getWidth();
+        //xPos = 540;
+        xPos = ranGen.nextInt() % ScreenWidth;
 
       // Set a speed to cross the screen
         speed = _view.getWidth() * 0.2f;
@@ -59,11 +59,11 @@ public class PaperEntity implements EntityBase{
         spritepaper.Update(_dt);
 
         yPos += speed * _dt;
-        // Check if out of the screen;
-        //if (yPos >= -spritepaper.GetHeight() * 0.3f)
+        // Check if out of the screen
+        // if (yPos >= 1920)
        //{
             // Move it to another Location
-       //     yPos = yStart;
+        //    yPos = yStart;
 
         //}
 
@@ -76,7 +76,7 @@ public class PaperEntity implements EntityBase{
     @Override
     public void Render(Canvas _canvas) {
         //wk 8=>draw sprite using xpos,ypos, must cast in int
-        spritepaper.Render(_canvas, (int)xPos, (int)yPos);
+        spritepaper.Render(_canvas,(int)xPos,  (int)yPos);
     }
 
     @Override
