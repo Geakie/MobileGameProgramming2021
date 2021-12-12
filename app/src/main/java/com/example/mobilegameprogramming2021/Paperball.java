@@ -18,6 +18,11 @@ public class Paperball implements EntityBase, Collidable{
     float imgradiusball;
     public float speed;
 
+
+
+
+
+
     //check if anything to do with entity (use for pause)
     @Override
     public boolean IsDone() {
@@ -54,11 +59,15 @@ public class Paperball implements EntityBase, Collidable{
         scaledbmp = Bitmap.createScaledBitmap(bmp, ScreenWidth, ScreenHeight, true);
 
 
+
+
+
     }
 
     @Override
     public void Update(float _dt) {
         if (GameSystem.Instance.GetIsPaused()) return;
+
 
         // Check if out of the screen
         if (yPos > ScreenHeight2)

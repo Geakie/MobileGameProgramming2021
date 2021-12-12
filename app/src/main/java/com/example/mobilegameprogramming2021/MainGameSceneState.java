@@ -8,6 +8,8 @@ import android.graphics.Paint;
 import android.view.MotionEvent;
 import android.view.SurfaceView;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 // Created by TanSiewLan2021
@@ -15,13 +17,16 @@ import java.util.Random;
 public class MainGameSceneState implements StateBase {
     private Trashcan trashcan;
     private TouchManager touchManager;
-    private PaperEntity paperEntity;
-
-    private Paperball[] paperballs;
-
+    private PaperEntity[] paperEntities;
+    public RenderTextEntity textEntity;
     private float xPos, yPos;
-
     private float timer = 0.0f;
+
+
+
+    public MainGameSceneState()
+    {
+    }
 
     @Override
     public String GetName() {
@@ -36,9 +41,14 @@ public class MainGameSceneState implements StateBase {
         RenderBackground.Create(); // Background is an entity
         RenderTextEntity.Create(); // Text Entity
         Trashcan.Create(); // Player Entity
-        //PaperEntity.Create(); // Gameobject Entity 1
-        Paperball.Create();
+        PaperEntity.Create(); // Gameobject Entity 1
+        //Paperball.Create();
         PauseButtonEntity.Create(); //wk8 <-add pause button
+
+        for (int i = 0; i < 50; i++)
+        {
+            PaperEntity.Create();
+        }
 
         // Example to include another Renderview for Pause Button
     }
@@ -55,6 +65,9 @@ public class MainGameSceneState implements StateBase {
         EntityManager.Instance.Update(_dt);
 
         if (GameSystem.Instance.GetIsPaused()) return;
+
+
+
 
         //if (TouchManager.Instance.IsDown()) {
 

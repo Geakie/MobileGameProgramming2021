@@ -7,25 +7,20 @@ import android.view.Display;
 import android.view.SurfaceView;
 import java.util.Random;
 
-public class PaperEntity implements EntityBase{
+public class PaperEntity implements EntityBase, Collidable{
     private boolean isDone = false;
     public int ScreenWidth, ScreenHeight;
-    private float yStart = 1,xPos = 0,yPos = 0, offset;
-    private float speed;
+    public float yStart = 1,xPos = 0,yPos = 0, offset;
+    public float speed;
     Random ranGen;
     private SurfaceView view = null;
     DisplayMetrics metrics;
     private Sprite spritepaper = null;   // New on Week 8
+    float imgradiussprite;
+    private PaperEntity[] paperEntities;
 
 
-    public float getposX()
-    {
-        return xPos;
-    }
-    public float getposY()
-    {
-        return yPos;
-    }
+
 
     @Override
     public boolean IsDone() {
@@ -44,17 +39,20 @@ public class PaperEntity implements EntityBase{
 
         // Randomize a location to spawn, Y is fixed, x is random
         Random ranGen = new Random();
-        yStart = yPos = 0;
+        yStart = yPos = 10;
         ScreenWidth = _view.getWidth();
         ScreenHeight = _view.getHeight();
-        xPos = ranGen.nextInt(ScreenWidth) % ScreenWidth;
+        xPos = ranGen.nextInt(ScreenWidth);
+
+        imgradiussprite = (float) (spritepaper.GetWidth() * 0.5);
 
         // Set a speed to cross the screen
-        speed = _view.getWidth() * 0.2f;
+        speed = (ranGen.nextInt((5) + 3) * _view.getWidth() * 0.3f);
 
         //week 8=>randomise position
         //xPos = ranGen.nextFloat() * _view.getWidth();
         //yPos = ranGen.nextFloat() * _view.getHeight();
+
     }
 
     @Override
@@ -92,7 +90,7 @@ public class PaperEntity implements EntityBase{
 
     @Override
     public int GetRenderLayer() {
-        return LayerConstants.GAMEOBJECTS_LAYER;
+        return LayerConstants.BACKGROUND_LAYER;
     } //wk 8=>update player layer
 
     @Override
@@ -109,4 +107,31 @@ public class PaperEntity implements EntityBase{
         return result;
     }
 
+    @Override
+    public String GetType() {
+        return "PaperEntity";
+    }
+
+    @Override
+    public float GetPosX() {
+        return xPos;
+    }
+
+    @Override
+    public float GetPosY() {
+        return yPos;
+    }
+
+    @Override
+    public float GetRadius() {
+        return imgradiussprite;
+    }
+
+    @Override
+    public void OnHit(Collidable _other) {
+        if (_other.GetType() == "Trashcan")
+        {
+            SetIsDone(true);
+        }
+    }
 }

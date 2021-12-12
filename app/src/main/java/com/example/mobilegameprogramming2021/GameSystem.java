@@ -11,6 +11,7 @@ public class GameSystem {
     public final static GameSystem Instance = new GameSystem();
 
     // Game stuff
+    private boolean isEnded = false;
     private boolean isPaused = false;
 
     // Singleton Pattern : Blocks others from creating
@@ -31,6 +32,8 @@ public class GameSystem {
         // We will add all of our states into the state manager here!
         StateManager.Instance.AddState(new Mainmenu());
         StateManager.Instance.AddState(new MainGameSceneState());
+        StateManager.Instance.AddState(new Instructionmenu());
+        StateManager.Instance.AddState(new Optionmenu());
     }
 
     public void SetIsPaused(boolean _newIsPaused)
@@ -38,9 +41,16 @@ public class GameSystem {
         isPaused = _newIsPaused;
     }
 
+
+
     public boolean GetIsPaused()
     {
         return isPaused;
+    }
+
+    public boolean GetIsEnded()
+    {
+        return isEnded;
     }
 
 }

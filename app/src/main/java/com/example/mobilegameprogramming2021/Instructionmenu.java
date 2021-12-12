@@ -34,6 +34,8 @@ public class Instructionmenu extends Activity implements OnClickListener, StateB
         btn_back = (Button)findViewById(R.id.btn_back);
         btn_back.setOnClickListener(this); // Set Listener to this button --> Back Button
 
+        StateManager.Instance.AddState(new Instructionmenu());
+
     }
 
     @Override

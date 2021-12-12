@@ -8,6 +8,7 @@ import android.view.SurfaceView;
 public class RenderTextEntity implements EntityBase{
     // Paint
     Paint paint = new Paint();
+    Paint paint2 = new Paint();
     private  int red = 0, green = 0, blue = 0;
     Typeface myfont;  // USe for loading font
 
@@ -17,7 +18,9 @@ public class RenderTextEntity implements EntityBase{
     long lastTime = 0;
     long lastFPSTime = 0;
     float fps;
+    float Timer = 30;
     boolean isDone;
+
 
 
     @Override
@@ -38,6 +41,8 @@ public class RenderTextEntity implements EntityBase{
     public void Update(float _dt) {
         // get actual fps
         frameCount++;
+        // Update Time
+        Timer -= 1 * _dt;
 
         long currentTime = System.currentTimeMillis();
 
@@ -56,8 +61,16 @@ public class RenderTextEntity implements EntityBase{
         paint.setARGB(255, 0, 0, 0);
         paint.setStrokeWidth(200);
         paint.setTypeface(myfont);
-        paint.setTextSize(70);
+        paint.setTextSize(50);
+
+        paint2.setARGB(255, 1, 1, 1);
+        paint2.setStrokeWidth(200);
+        paint2.setTypeface(myfont);
+        paint2.setTextSize(50);
+
         _canvas.drawText("FPS: " + Math.round(fps), 30, 80, paint); // For now, default number but u can use _view.getWidth/ ?
+        _canvas.drawText("Time: " + Math.round(Timer), 450, 80, paint);
+
     }
     @Override
     public boolean IsInit(){
