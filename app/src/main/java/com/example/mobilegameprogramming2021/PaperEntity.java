@@ -47,8 +47,7 @@ public class PaperEntity implements EntityBase, Collidable{
         imgradiussprite = (float) (spritepaper.GetWidth() * 0.5);
 
         // Set a speed to cross the screen
-        speed = (ranGen.nextInt((5) + 3) * _view.getWidth() * 0.3f);
-
+        speed = (ranGen.nextInt(10) + 1) * _view.getWidth() * 0.1f;
         //week 8=>randomise position
         //xPos = ranGen.nextFloat() * _view.getWidth();
         //yPos = ranGen.nextFloat() * _view.getHeight();
