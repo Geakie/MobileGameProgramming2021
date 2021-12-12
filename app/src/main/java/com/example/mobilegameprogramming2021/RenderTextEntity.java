@@ -18,7 +18,7 @@ public class RenderTextEntity implements EntityBase{
     long lastTime = 0;
     long lastFPSTime = 0;
     float fps;
-    float Timer = 10;
+    float Timer = 10.0f;
     boolean isDone;
 
 
@@ -97,4 +97,11 @@ public class RenderTextEntity implements EntityBase{
         EntityManager.Instance.AddEntity(result, ENTITY_TYPE.ENT_TEXT);
         return result;
     }
+
+    public float gettimer()
+    {
+        return Timer;
+    }
+
+
 }
