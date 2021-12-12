@@ -17,7 +17,7 @@ import java.util.Random;
 public class MainGameSceneState implements StateBase {
     private Trashcan trashcan;
     private TouchManager touchManager;
-    private PaperEntity[] paperEntities;
+    private PaperEntity paperEntities;
     public RenderTextEntity textEntity;
     private float xPos, yPos;
     public float timer = 10.0f;
@@ -63,6 +63,9 @@ public class MainGameSceneState implements StateBase {
         EntityManager.Instance.Update(_dt);
 
         if (GameSystem.Instance.GetIsPaused()) return;
+
+
+
 
         //if (TouchManager.Instance.IsDown()) {
 
