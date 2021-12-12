@@ -1,11 +1,15 @@
 package com.example.mobilegameprogramming2021;
 
+import android.content.Context;
+import android.content.Intent;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Typeface;
 import android.view.SurfaceView;
 
-public class RenderTextEntity implements EntityBase{
+import java.sql.Time;
+
+public class RenderTextEntity extends Context implements EntityBase{
     // Paint
     Paint paint = new Paint();
     Paint paint2 = new Paint();
@@ -18,8 +22,9 @@ public class RenderTextEntity implements EntityBase{
     long lastTime = 0;
     long lastFPSTime = 0;
     float fps;
-    float Timer = 10.0f;
+    float Timer = 60.0f;
     boolean isDone;
+    Intent intent = new Intent();
 
 
 
@@ -47,6 +52,12 @@ public class RenderTextEntity implements EntityBase{
         long currentTime = System.currentTimeMillis();
 
         lastTime = currentTime;
+
+        if (Timer <= 0.0f)
+        {
+            intent.setClass(this,Mainmenu.class);
+            StateManager.Instance.ChangeState("GameOver");
+        }
 
         if (currentTime - lastFPSTime > 1000)
         {
