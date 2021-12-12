@@ -7,6 +7,7 @@ import android.view.SurfaceView;
 // Created by TanSiewLan2021
 
 public class GameSystem {
+
     public final static GameSystem Instance = new GameSystem();
 
     // Game stuff
@@ -20,6 +21,8 @@ public class GameSystem {
 
     public void Update(float _deltaTime)
     {
+
+
     }
 
     public void Init(SurfaceView _view)

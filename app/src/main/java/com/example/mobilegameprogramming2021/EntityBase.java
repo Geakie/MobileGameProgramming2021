@@ -14,6 +14,7 @@ public interface EntityBase
          ENT_PAPER,
         ENT_PAUSE,
         ENT_TEXT,
+         ENT_PAPERBALL,
         //ENT_NEXT,
         ENT_DEFAULT,
     }

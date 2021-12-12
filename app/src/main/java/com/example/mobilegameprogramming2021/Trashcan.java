@@ -6,12 +6,13 @@ import android.view.Display;
 import android.view.SurfaceView;
 import java.util.Random;
 
-public class Trashcan implements EntityBase{
+public class Trashcan implements EntityBase, Collidable{
     private boolean isDone = false;
     private int screenX, screenY;
     private float xPos, yPos,width,height, offset;
     private Sprite spriteplayer = null;   // New on Week 8
     private float screenRatioX,screenRatioY;
+    float imgRadius1;
 
     //Random ranGen = new Random(); //wk 8=>Random Generator
 
@@ -30,9 +31,9 @@ public class Trashcan implements EntityBase{
         //week 8 => create new sprite instance
         spriteplayer = new Sprite(ResourceManager.Instance.GetBitmap(R.drawable.player),1,3, 1 );
 
-
-        xPos = 1 * _view.getWidth()/2;
-        yPos = 1 * _view.getHeight() -160;
+        imgRadius1 = spriteplayer.GetWidth() * 0.5f;
+        xPos = _view.getWidth()/2;
+        yPos = _view.getHeight() -160;
 
         //week 8=>randomise position
         //xPos = ranGen.nextFloat() * _view.getWidth();
@@ -51,7 +52,6 @@ public class Trashcan implements EntityBase{
         if (TouchManager.Instance.HasTouch())  // Touch and drag
         {
             // Check collision with the smurf sprite
-            float imgRadius1 = spriteplayer.GetWidth() * 0.5f;
             //Log.v("imgrad","s"+imgRadius1);
             if (Collision.SphereToSphere(TouchManager.Instance.GetPosX(), TouchManager.Instance.GetPosY(), 0.0f, xPos, yPos, imgRadius1)) {
                 xPos = TouchManager.Instance.GetPosX();
@@ -96,18 +96,33 @@ public class Trashcan implements EntityBase{
         return xPos;
     }
 
+    @Override
+    public String GetType() {
+        return "Trashcan";
+    }
+
+    @Override
+    public float GetPosX() {
+        return xPos;
+    }
+
     public float GetPosY()
     {
         return yPos;
     }
 
-
-    public void onHit(Collidable _other)
+    public float GetRadius()
     {
-        if (_other.GetType() == "PaperEntity")
+        return imgRadius1;
+    }
+
+    @Override
+    public void OnHit(Collidable _other) {
+        if (_other.GetType() == "Paperball")
         {
-            // SetisDone
+
         }
+
     }
 
 

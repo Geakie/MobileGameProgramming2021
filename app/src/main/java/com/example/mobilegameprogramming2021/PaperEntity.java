@@ -9,15 +9,23 @@ import java.util.Random;
 
 public class PaperEntity implements EntityBase{
     private boolean isDone = false;
-    int ScreenWidth, ScreenHeight;
+    public int ScreenWidth, ScreenHeight;
     private float yStart = 1,xPos = 0,yPos = 0, offset;
     private float speed;
     Random ranGen;
     private SurfaceView view = null;
     DisplayMetrics metrics;
     private Sprite spritepaper = null;   // New on Week 8
-    private float screenRatioX,screenRatioY;
 
+
+    public float getposX()
+    {
+        return xPos;
+    }
+    public float getposY()
+    {
+        return yPos;
+    }
 
     @Override
     public boolean IsDone() {
@@ -41,7 +49,7 @@ public class PaperEntity implements EntityBase{
         ScreenHeight = _view.getHeight();
         xPos = ranGen.nextInt(ScreenWidth) % ScreenWidth;
 
-      // Set a speed to cross the screen
+        // Set a speed to cross the screen
         speed = _view.getWidth() * 0.2f;
 
         //week 8=>randomise position
@@ -61,7 +69,6 @@ public class PaperEntity implements EntityBase{
         // Check if out of the screen
         if (yPos > ScreenHeight)
         {
-            System.out.println(xPos);
             yPos = 0;
         }
         else
@@ -69,11 +76,6 @@ public class PaperEntity implements EntityBase{
             // Update the paper position using speed
             yPos += speed * _dt;
         }
-
-
-        // Check Collision with Player
-        //if (Collision.SphereToSphere(xPos,yPos, spritepaper.GetWidth() * 0.5f,GameSystem.Instance.))
-
     }
 
 
