@@ -10,14 +10,13 @@ import java.util.Random;
 public class PaperEntity implements EntityBase{
     private boolean isDone = false;
     int ScreenWidth, ScreenHeight;
-    private float yStart = 0,xPos = 0,yPos = 0, offset;
+    private float yStart = 1,xPos = 0,yPos = 0, offset;
     private float speed;
     Random ranGen;
     private SurfaceView view = null;
     DisplayMetrics metrics;
     private Sprite spritepaper = null;   // New on Week 8
     private float screenRatioX,screenRatioY;
-
 
 
     @Override
@@ -37,10 +36,10 @@ public class PaperEntity implements EntityBase{
 
         // Randomize a location to spawn, Y is fixed, x is random
         Random ranGen = new Random();
-        yStart = yPos = 500;
+        yStart = yPos = 0;
         ScreenWidth = _view.getWidth();
-        //xPos = 540;
-        xPos = ranGen.nextInt() % ScreenWidth;
+        ScreenHeight = _view.getHeight();
+        xPos = ranGen.nextInt(ScreenWidth) % ScreenWidth;
 
       // Set a speed to cross the screen
         speed = _view.getWidth() * 0.2f;
@@ -58,14 +57,19 @@ public class PaperEntity implements EntityBase{
         // wk8=> update sprite animation frame based on timing
         spritepaper.Update(_dt);
 
-        yPos += speed * _dt;
-        // Check if out of the screen
-        // if (yPos >= 1920)
-       //{
-            // Move it to another Location
-        //    yPos = yStart;
 
-        //}
+        // Check if out of the screen
+        if (yPos > ScreenHeight)
+        {
+            System.out.println(xPos);
+            yPos = 0;
+        }
+        else
+        {
+            // Update the paper position using speed
+            yPos += speed * _dt;
+        }
+
 
         // Check Collision with Player
         //if (Collision.SphereToSphere(xPos,yPos, spritepaper.GetWidth() * 0.5f,GameSystem.Instance.))

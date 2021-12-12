@@ -12,22 +12,9 @@ import android.view.SurfaceView;
 public class MainGameSceneState implements StateBase {
     private Trashcan trashcan;
     private TouchManager touchManager;
-    private PaperEntity[] paperEntities;
     private float xPos, yPos;
 
     private float timer = 0.0f;
-
-
-    public MainGameSceneState()
-    {
-        paperEntities = new PaperEntity[5];
-        for (int i  = 0;i < 4; i++)
-        {
-            PaperEntity paperEntity = new PaperEntity();
-            paperEntities[i] = paperEntity;
-        }
-    }
-
 
 
     @Override
@@ -61,11 +48,6 @@ public class MainGameSceneState implements StateBase {
         EntityManager.Instance.Update(_dt);
 
         if (GameSystem.Instance.GetIsPaused()) return;
-
-        for (PaperEntity paperEntities : paperEntities)
-        {
-
-        }
 
         if (TouchManager.Instance.IsDown())
         {
