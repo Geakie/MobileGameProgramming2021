@@ -17,7 +17,6 @@ public class PaperEntity implements EntityBase, Collidable{
     DisplayMetrics metrics;
     private Sprite spritepaper = null;   // New on Week 8
     float imgradiussprite;
-    private PaperEntity[] paperEntities;
 
 
 
@@ -130,6 +129,7 @@ public class PaperEntity implements EntityBase, Collidable{
     public void OnHit(Collidable _other) {
         if (_other.GetType() == "Trashcan")
         {
+
             SetIsDone(true);
         }
     }

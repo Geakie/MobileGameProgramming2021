@@ -17,10 +17,10 @@ import java.util.Random;
 public class MainGameSceneState implements StateBase {
     private Trashcan trashcan;
     private TouchManager touchManager;
-    private PaperEntity[] paperEntities;
+    private PaperEntity paperEntities;
     public RenderTextEntity textEntity;
     private float xPos, yPos;
-    private float timer = 0.0f;
+    public float timer = 10.0f;
 
 
 
@@ -49,8 +49,6 @@ public class MainGameSceneState implements StateBase {
         {
             PaperEntity.Create();
         }
-
-        // Example to include another Renderview for Pause Button
     }
 
     @Override
