@@ -18,7 +18,7 @@ public class RenderTextEntity implements EntityBase{
     long lastTime = 0;
     long lastFPSTime = 0;
     float fps;
-    float Timer = 10;
+    float Timer = 60;
     boolean isDone;
 
 
@@ -47,6 +47,11 @@ public class RenderTextEntity implements EntityBase{
         long currentTime = System.currentTimeMillis();
 
         lastTime = currentTime;
+
+        if (Timer <= 0)
+        {
+            //ssdad
+        }
 
         if (currentTime - lastFPSTime > 1000)
         {
