@@ -79,6 +79,7 @@ public class RenderTextEntity implements EntityBase{
         paint2.setTypeface(myfont);
         paint2.setTextSize(50);
 
+
         _canvas.drawText("FPS: " + Math.round(fps), 30, 80, paint); // For now, default number but u can use _view.getWidth/ ?
         _canvas.drawText("Time: " + Math.round(Timer), 450, 80, paint);
 
