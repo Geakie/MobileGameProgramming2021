@@ -9,7 +9,7 @@ import android.view.SurfaceView;
 
 import java.sql.Time;
 
-public class RenderTextEntity extends Context implements EntityBase{
+public class RenderTextEntity implements EntityBase{
     // Paint
     Paint paint = new Paint();
     Paint paint2 = new Paint();
@@ -22,7 +22,7 @@ public class RenderTextEntity extends Context implements EntityBase{
     long lastTime = 0;
     long lastFPSTime = 0;
     float fps;
-    float Timer = 60.0f;
+    float Timer = 10.0f;
     boolean isDone;
     //Intent intent = new Intent();
 
@@ -53,12 +53,11 @@ public class RenderTextEntity extends Context implements EntityBase{
 
         lastTime = currentTime;
 
-/*
-         if (Timer <= 0.0f)
-        {
-             StateManager.Instance.ChangeState("GameOver")
-       }
- */
+        //if (Timer <= 0.0f)
+        //{
+        //    intent.setClass(this,Mainmenu.class);
+        //    StateManager.Instance.ChangeState("GameOver");
+        //}
 
         if (currentTime - lastFPSTime > 1000)
         {
@@ -79,6 +78,7 @@ public class RenderTextEntity extends Context implements EntityBase{
         paint2.setStrokeWidth(200);
         paint2.setTypeface(myfont);
         paint2.setTextSize(50);
+
 
         _canvas.drawText("FPS: " + Math.round(fps), 30, 80, paint); // For now, default number but u can use _view.getWidth/ ?
         _canvas.drawText("Time: " + Math.round(Timer), 450, 80, paint);
