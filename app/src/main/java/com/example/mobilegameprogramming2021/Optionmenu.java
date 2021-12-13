@@ -29,7 +29,7 @@ public class Optionmenu extends Activity implements OnClickListener, StateBase{
         // Hide Top Bar
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
-        setContentView(R.layout.instructionmenu);
+        setContentView(R.layout.optionmenu);
 
         btn_back = (Button)findViewById(R.id.btn_back);
         btn_back.setOnClickListener(this); // Set Listener to this button --> Back Button
