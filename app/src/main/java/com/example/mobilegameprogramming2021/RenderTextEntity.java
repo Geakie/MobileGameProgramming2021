@@ -44,6 +44,9 @@ public class RenderTextEntity implements EntityBase{
     }
     @Override
     public void Update(float _dt) {
+
+        if (GameSystem.Instance.GetIsPaused()) return;
+
         // get actual fps
         frameCount++;
         // Update Time
