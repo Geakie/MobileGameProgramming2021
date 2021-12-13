@@ -24,7 +24,7 @@ public class RenderTextEntity extends Context implements EntityBase{
     float fps;
     float Timer = 60.0f;
     boolean isDone;
-    Intent intent = new Intent();
+    //Intent intent = new Intent();
 
 
 
@@ -53,11 +53,12 @@ public class RenderTextEntity extends Context implements EntityBase{
 
         lastTime = currentTime;
 
-        if (Timer <= 0.0f)
+/*
+         if (Timer <= 0.0f)
         {
-            intent.setClass(this,Mainmenu.class);
-            StateManager.Instance.ChangeState("GameOver");
-        }
+             StateManager.Instance.ChangeState("GameOver")
+       }
+ */
 
         if (currentTime - lastFPSTime > 1000)
         {
