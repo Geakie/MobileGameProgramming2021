@@ -22,8 +22,6 @@ public class GameSystem {
 
     public void Update(float _deltaTime)
     {
-
-
     }
 
     public void Init(SurfaceView _view)
@@ -34,6 +32,7 @@ public class GameSystem {
         StateManager.Instance.AddState(new MainGameSceneState());
         StateManager.Instance.AddState(new Instructionmenu());
         StateManager.Instance.AddState(new Optionmenu());
+        StateManager.Instance.AddState(new GameOver());
     }
 
     public void SetIsPaused(boolean _newIsPaused)
@@ -41,6 +40,10 @@ public class GameSystem {
         isPaused = _newIsPaused;
     }
 
+    public void SetIsEnded(boolean _newIsEnded)
+    {
+        isEnded = _newIsEnded;
+    }
 
 
     public boolean GetIsPaused()

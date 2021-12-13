@@ -9,7 +9,7 @@ import android.view.SurfaceView;
 
 import java.sql.Time;
 
-public class RenderTextEntity extends Context implements EntityBase, StateBase{
+public class RenderTextEntity extends Context implements EntityBase{
     // Paint
     Paint paint = new Paint();
     Paint paint2 = new Paint();
@@ -55,7 +55,7 @@ public class RenderTextEntity extends Context implements EntityBase, StateBase{
 
         if (Timer <= 0.0f)
         {
-            intent.setClass(this,GameOver.class);
+            intent.setClass(this,Mainmenu.class);
             StateManager.Instance.ChangeState("GameOver");
         }
 

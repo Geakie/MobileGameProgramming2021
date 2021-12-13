@@ -2,6 +2,8 @@ package com.example.mobilegameprogramming2021;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
+import android.content.res.AssetManager;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -14,19 +16,13 @@ import java.util.Random;
 
 // Created by TanSiewLan2021
 
-public class MainGameSceneState implements StateBase {
+public class MainGameSceneState extends Activity implements StateBase {
     private Trashcan trashcan;
     private TouchManager touchManager;
     private PaperEntity paperEntities;
     public RenderTextEntity textEntity;
     private float xPos, yPos;
     public float timer = 10.0f;
-
-
-
-    public MainGameSceneState()
-    {
-    }
 
     @Override
     public String GetName() {
@@ -64,7 +60,14 @@ public class MainGameSceneState implements StateBase {
 
         if (GameSystem.Instance.GetIsPaused()) return;
 
-
+        if (timer <= 0)
+        {
+            StateManager.Instance.ChangeState("GameOver");
+        }
+        else
+        {
+            timer -= 1 * _dt;
+        }
 
 
         //if (TouchManager.Instance.IsDown()) {
@@ -73,6 +76,8 @@ public class MainGameSceneState implements StateBase {
             //StateManager.Instance.ChangeState("Mainmenu");
         //}
     }
+
+
 
 
 

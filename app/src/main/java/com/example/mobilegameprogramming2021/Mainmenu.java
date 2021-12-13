@@ -66,16 +66,16 @@ public class Mainmenu extends Activity implements OnClickListener, StateBase{
             // Intent -> to set to another class which is another page or screen to be launched
             // Equal to change screen
             intent.setClass(this,GamePage.class);
-                StateManager.Instance.ChangeState("MainGame"); // Default is like a loading Page
+            StateManager.Instance.ChangeState("MainGame"); // Default is like a loading Page
         }
         else if (v == btn_instruction)
         {
             intent.setClass(this,Instructionmenu.class);
-                StateManager.Instance.ChangeState("Instructionmenu");
+            StateManager.Instance.ChangeState("Instructionmenu");
         }
         else if (v == btn_option)
         {
-            intent.setClass(this,Instructionmenu.class);
+            intent.setClass(this,Optionmenu.class);
             StateManager.Instance.ChangeState("Optionmenu");
         }
         else if (v == btn_exit)
@@ -96,7 +96,10 @@ public class Mainmenu extends Activity implements OnClickListener, StateBase{
     public void OnExit() {}
 
     @Override
-    public void Update(float _dt){}
+    public void Update(float _dt){
+
+
+    }
 
     @Override
     public String GetName() {return "Mainmenu";}
