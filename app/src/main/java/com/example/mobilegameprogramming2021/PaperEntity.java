@@ -3,9 +3,13 @@ package com.example.mobilegameprogramming2021;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.Display;
 import android.view.SurfaceView;
 import java.util.Random;
+import android.os.Build;
+import android.os.VibrationEffect;
+import android.os.Vibrator;
 
 public class PaperEntity implements EntityBase, Collidable{
     private boolean isDone = false;
@@ -17,6 +21,7 @@ public class PaperEntity implements EntityBase, Collidable{
     DisplayMetrics metrics;
     private Sprite spritepaper = null;   // New on Week 8
     float imgradiussprite;
+    private Vibrator _vibrator;
 
 
 
@@ -46,10 +51,13 @@ public class PaperEntity implements EntityBase, Collidable{
         imgradiussprite = (float) (spritepaper.GetWidth() * 0.5);
 
         // Set a speed to cross the screen
-        speed = (ranGen.nextInt(10) + 1) * _view.getWidth() * 0.1f;
+        speed = (ranGen.nextInt(20) + 1) * _view.getWidth() * 0.05f;
         //week 8=>randomise position
         //xPos = ranGen.nextFloat() * _view.getWidth();
         //yPos = ranGen.nextFloat() * _view.getHeight();
+
+        // Setup Hardware vibrate
+        _vibrator = (Vibrator) _view.getContext().getSystemService(_view.getContext().VIBRATOR_SERVICE);
 
     }
 
@@ -129,8 +137,29 @@ public class PaperEntity implements EntityBase, Collidable{
     public void OnHit(Collidable _other) {
         if (_other.GetType() == "Trashcan")
         {
-
+            AudioManager.Instance.PlayAudio(R.raw.correct, 0.9f);
+            startVibrate();
             SetIsDone(true);
         }
     }
+
+    // Vibrate
+    public void startVibrate()
+    {
+        if (Build.VERSION.SDK_INT >= 26)
+        {
+            _vibrator.vibrate(VibrationEffect.createOneShot(150,10));
+        }
+        else
+        {
+            long pattern[] = {0, 50, 0};
+            _vibrator.vibrate(pattern, -1);
+        }
+    }
+
+    public void stopVibrate()
+    {
+        _vibrator.cancel();
+    }
+
 }

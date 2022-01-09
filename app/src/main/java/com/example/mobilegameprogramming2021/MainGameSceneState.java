@@ -24,6 +24,7 @@ public class MainGameSceneState extends Activity implements StateBase {
     private float xPos, yPos;
     public float timer = 10.0f;
 
+
     @Override
     public String GetName() {
         return "MainGame";
@@ -41,7 +42,7 @@ public class MainGameSceneState extends Activity implements StateBase {
         //Paperball.Create();
         PauseButtonEntity.Create(); //wk8 <-add pause button
 
-        for (int i = 0; i < 50; i++)
+        for (int i = 0; i < 20; i++)
         {
             PaperEntity.Create();
         }

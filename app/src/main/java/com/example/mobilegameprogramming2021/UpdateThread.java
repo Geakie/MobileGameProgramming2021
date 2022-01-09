@@ -26,7 +26,7 @@ public class UpdateThread extends Thread {
         StateManager.Instance.Init(_view);
         EntityManager.Instance.Init(_view);
         GameSystem.Instance.Init(_view);
-        // Audio
+        AudioManager.Instance.Init(_view);
         // Touch
         // Res
         ResourceManager.Instance.Init(_view);
