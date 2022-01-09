@@ -53,6 +53,14 @@ public class MainGameSceneState extends Activity implements StateBase {
     {
         EntityManager.Instance.Render(_canvas);
 
+        String scoreText = String.format("SCORE : %d", GameSystem.Instance.GetIntFromSave("Score"));
+
+        Paint paint = new Paint();
+        paint.setColor(Color.BLACK);
+        paint.setTextSize(64);
+
+        _canvas.drawText(scoreText, 10, 220, paint);
+
     }
 
     @Override

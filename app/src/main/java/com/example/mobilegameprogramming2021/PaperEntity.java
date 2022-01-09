@@ -139,6 +139,13 @@ public class PaperEntity implements EntityBase, Collidable{
         {
             AudioManager.Instance.PlayAudio(R.raw.correct, 0.9f);
             startVibrate();
+
+            int currScore  = GameSystem.Instance.GetIntFromSave("Score");
+            ++ currScore;
+            GameSystem.Instance.SaveEditBegin();
+            GameSystem.Instance.SetIntInSave("Score", currScore);
+            GameSystem.Instance.SaveEditEnd();
+
             SetIsDone(true);
         }
     }
