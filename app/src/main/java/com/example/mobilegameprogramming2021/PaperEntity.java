@@ -74,6 +74,7 @@ public class PaperEntity implements EntityBase, Collidable{
         if (yPos > ScreenHeight)
         {
             yPos = 0;
+            AudioManager.Instance.PlayAudio(R.raw.pointlost, 1.0f);
         }
         else
         {
@@ -137,8 +138,15 @@ public class PaperEntity implements EntityBase, Collidable{
     public void OnHit(Collidable _other) {
         if (_other.GetType() == "Trashcan")
         {
-            AudioManager.Instance.PlayAudio(R.raw.correct, 0.9f);
-            startVibrate();
+            AudioManager.Instance.PlayAudio(R.raw.pointgain, 1.0f);
+            //startVibrate();
+
+            int currScore  = GameSystem.Instance.GetIntFromSave("Score");
+            ++ currScore;
+            GameSystem.Instance.SaveEditBegin();
+            GameSystem.Instance.SetIntInSave("Score", currScore);
+            GameSystem.Instance.SaveEditEnd();
+
             SetIsDone(true);
         }
     }

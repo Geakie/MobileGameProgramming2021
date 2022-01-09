@@ -42,7 +42,10 @@ public class MainGameSceneState extends Activity implements StateBase {
         //Paperball.Create();
         PauseButtonEntity.Create(); //wk8 <-add pause button
 
-        for (int i = 0; i < 20; i++)
+        AudioManager.Instance.PlayAudio(R.raw.bgm, 1.0f);
+
+
+        for (int i = 0; i < 10; i++)
         {
             PaperEntity.Create();
         }
@@ -52,6 +55,14 @@ public class MainGameSceneState extends Activity implements StateBase {
     public void Render(Canvas _canvas)
     {
         EntityManager.Instance.Render(_canvas);
+
+        String scoreText = String.format("SCORE : %d", GameSystem.Instance.GetIntFromSave("Score"));
+
+        Paint paint = new Paint();
+        paint.setColor(Color.BLACK);
+        paint.setTextSize(64);
+
+        _canvas.drawText(scoreText, 10, 220, paint);
 
     }
 
@@ -86,6 +97,8 @@ public class MainGameSceneState extends Activity implements StateBase {
     public void OnExit() {
         EntityManager.Instance.Clean();
         GamePage.Instance.finish();
+        AudioManager.Instance.StopAudio(R.raw.bgm);
+
     }
 
 }

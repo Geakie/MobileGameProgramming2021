@@ -1,18 +1,28 @@
 package com.example.mobilegameprogramming2021;
 
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.view.Display;
 import android.view.SurfaceView;
 import java.util.Random;
 
-public class Trashcan implements EntityBase, Collidable{
+import android.hardware.Sensor;
+import android.hardware.SensorEvent;
+import android.hardware.SensorEventListener;
+import android.hardware.SensorManager;
+
+
+public class Trashcan implements EntityBase, Collidable,SensorEventListener{
     private boolean isDone = false;
     private int screenX, screenY;
     private float xPos, yPos,width,height, offset;
     private Sprite spriteplayer = null;   // New on Week 8
     private float screenRatioX,screenRatioY;
     float imgRadius1;
+    private float[ ] values = {0,0,0};
+    private long lastTime = System.currentTimeMillis();
+
 
     //Random ranGen = new Random(); //wk 8=>Random Generator
 
@@ -38,6 +48,10 @@ public class Trashcan implements EntityBase, Collidable{
         //week 8=>randomise position
         //xPos = ranGen.nextFloat() * _view.getWidth();
         //yPos = ranGen.nextFloat() * _view.getHeight();
+
+
+
+
     }
 
     @Override
@@ -122,6 +136,26 @@ public class Trashcan implements EntityBase, Collidable{
         {
 
         }
+
+    }
+
+    @Override
+    public void onSensorChanged(SensorEvent event) {
+        //values = SenseEvent.values;
+    }
+
+    @Override
+    public void onAccuracyChanged(Sensor sensor, int accuracy) {
+
+    }
+
+    public void SensorMove(){
+        float tempx, tempy;
+
+        //values[1] for x
+        //values[0] for y
+
+
 
     }
 
