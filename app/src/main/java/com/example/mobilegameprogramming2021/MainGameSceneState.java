@@ -24,7 +24,6 @@ public class MainGameSceneState extends Activity implements StateBase {
     private float xPos, yPos;
     public float timer = 10.0f;
 
-
     @Override
     public String GetName() {
         return "MainGame";
@@ -49,6 +48,13 @@ public class MainGameSceneState extends Activity implements StateBase {
         {
             PaperEntity.Create();
         }
+
+
+        GameSystem.Instance.GetScore();
+        GameSystem.Instance.ResetScore();
+        GameSystem.Instance.SaveEditBegin();
+        GameSystem.Instance.SetIntInSave("Score", GameSystem.Instance.GetScore());
+        GameSystem.Instance.SaveEditEnd();
     }
 
     @Override
@@ -74,7 +80,7 @@ public class MainGameSceneState extends Activity implements StateBase {
 
         if (timer <= 0)
         {
-            StateManager.Instance.ChangeState("GameOver");
+            StateManager.Instance.ChangeState("Mainmenu");
         }
         else
         {

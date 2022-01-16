@@ -15,8 +15,12 @@ public class GameSystem {
     private boolean isEnded = false;
     private boolean isPaused = false;
 
+    // Scoring
+    private int currScore = 0;
     SharedPreferences sharedPref = null;
     SharedPreferences.Editor editor = null;
+
+    public Trashcan trashcaninstance = null;
 
 
     // Singleton Pattern : Blocks others from creating
@@ -42,6 +46,8 @@ public class GameSystem {
         StateManager.Instance.AddState(new Optionmenu());
         StateManager.Instance.AddState(new GameOver());
         StateManager.Instance.AddState(new PauseScreen());
+
+
     }
 
     public void SetIsPaused(boolean _newIsPaused)
@@ -104,5 +110,38 @@ public class GameSystem {
         return sharedPref.getInt(_key, 10);
     }
 
+
+    public int GetScore()
+    {
+        return currScore;
+    }
+
+
+    public void AddScore()
+    {
+        AddScore(1);
+    }
+
+
+    public void AddScore(int _amt)
+    {
+        currScore += _amt;
+    }
+
+    public void MinusScore()
+    {
+        MinusScore(1);
+    }
+
+    public void MinusScore(int _amt)
+    {
+        currScore -= _amt;
+    }
+
+
+    public void ResetScore()
+    {
+        currScore = 0;
+    }
 
 }

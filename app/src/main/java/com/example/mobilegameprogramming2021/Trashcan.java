@@ -22,6 +22,9 @@ public class Trashcan implements EntityBase, Collidable,SensorEventListener{
     float imgRadius1;
     private float[ ] values = {0,0,0};
     private long lastTime = System.currentTimeMillis();
+    private SensorManager sensorManager;
+    private Sensor sensor;
+
 
 
     //Random ranGen = new Random(); //wk 8=>Random Generator
@@ -49,7 +52,8 @@ public class Trashcan implements EntityBase, Collidable,SensorEventListener{
         //xPos = ranGen.nextFloat() * _view.getWidth();
         //yPos = ranGen.nextFloat() * _view.getHeight();
 
-
+        sensorManager = (SensorManager) _view.getContext().getSystemService(Context.SENSOR_SERVICE);
+        //sensor.registerListener(this, sensor.getSensorList(Sensor.TYPE_ACCELEROMETER).get(0), SensorManager.SENSOR_DELAY_NORMAL);
 
 
     }
@@ -141,7 +145,7 @@ public class Trashcan implements EntityBase, Collidable,SensorEventListener{
 
     @Override
     public void onSensorChanged(SensorEvent event) {
-        //values = SenseEvent.values;
+        //values = SensorEvent.
     }
 
     @Override

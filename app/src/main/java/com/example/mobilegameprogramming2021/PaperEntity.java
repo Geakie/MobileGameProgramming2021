@@ -22,8 +22,7 @@ public class PaperEntity implements EntityBase, Collidable{
     private Sprite spritepaper = null;   // New on Week 8
     float imgradiussprite;
     private Vibrator _vibrator;
-
-
+    private float SpawnTimer;
 
 
     @Override
@@ -59,6 +58,12 @@ public class PaperEntity implements EntityBase, Collidable{
         // Setup Hardware vibrate
         _vibrator = (Vibrator) _view.getContext().getSystemService(_view.getContext().VIBRATOR_SERVICE);
 
+        GameSystem.Instance.GetScore();
+        GameSystem.Instance.SaveEditBegin();
+        GameSystem.Instance.SetIntInSave("Score", GameSystem.Instance.GetScore());
+        GameSystem.Instance.SaveEditEnd();
+
+        SpawnTimer = 5;
     }
 
     @Override
@@ -75,6 +80,19 @@ public class PaperEntity implements EntityBase, Collidable{
         {
             yPos = 0;
             AudioManager.Instance.PlayAudio(R.raw.pointlost, 1.0f);
+            //int currScore  = GameSystem.Instance.GetIntFromSave("Score");
+            //currScore--;
+            //GameSystem.Instance.SaveEditBegin();
+            //GameSystem.Instance.SetIntInSave("Score", currScore);
+            //GameSystem.Instance.SaveEditEnd();
+
+
+            GameSystem.Instance.GetScore();
+            GameSystem.Instance.MinusScore();
+            GameSystem.Instance.SaveEditBegin();
+            GameSystem.Instance.SetIntInSave("Score", GameSystem.Instance.GetScore());
+            GameSystem.Instance.SaveEditEnd();
+
         }
         else
         {
@@ -141,11 +159,20 @@ public class PaperEntity implements EntityBase, Collidable{
             AudioManager.Instance.PlayAudio(R.raw.pointgain, 1.0f);
             //startVibrate();
 
-            int currScore  = GameSystem.Instance.GetIntFromSave("Score");
-            ++ currScore;
+            //int currScore  = GameSystem.Instance.GetIntFromSave("Score");
+            //currScore++;
+            //GameSystem.Instance.SaveEditBegin();
+            //GameSystem.Instance.SetIntInSave("Score", currScore);
+            //GameSystem.Instance.SaveEditEnd();
+
+            GameSystem.Instance.GetScore();
+            GameSystem.Instance.AddScore();
             GameSystem.Instance.SaveEditBegin();
-            GameSystem.Instance.SetIntInSave("Score", currScore);
+            GameSystem.Instance.SetIntInSave("Score", GameSystem.Instance.GetScore());
             GameSystem.Instance.SaveEditEnd();
+
+
+
 
             SetIsDone(true);
         }
@@ -168,6 +195,11 @@ public class PaperEntity implements EntityBase, Collidable{
     public void stopVibrate()
     {
         _vibrator.cancel();
+    }
+
+
+    public float GetSpawnTimer(){
+        return SpawnTimer;
     }
 
 }
