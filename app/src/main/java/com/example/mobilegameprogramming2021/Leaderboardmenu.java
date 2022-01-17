@@ -11,17 +11,11 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 
-public class Mainmenu extends Activity implements OnClickListener, StateBase{
-    // Define the button. We have 4 Buttons
+public class Leaderboardmenu extends Activity implements OnClickListener, StateBase{
+    // Define the button. We have 1 Buttons
 
-    // Start
-    private Button btn_start;
-    // Instruction
-    private Button btn_instruction;
-    // Option
-    private Button btn_leaderboard;
-    // Exit
-    private Button btn_exit;
+    // Back
+    private Button btn_back;
 
 
     @Override
@@ -35,19 +29,12 @@ public class Mainmenu extends Activity implements OnClickListener, StateBase{
         // Hide Top Bar
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
-        setContentView(R.layout.mainmenu);
+        setContentView(R.layout.leaderboardmenu);
 
-        btn_start = (Button)findViewById(R.id.btn_start);
-        btn_start.setOnClickListener(this); // Set Listener to this button --> Start Button
+        btn_back = (Button)findViewById(R.id.btn_back);
+        btn_back.setOnClickListener(this); // Set Listener to this button --> Back Button
 
-        btn_instruction = (Button)findViewById(R.id.btn_instruction);
-        btn_instruction.setOnClickListener(this); // Set Listener to this button --> Instruction Button
-
-        btn_leaderboard = (Button)findViewById(R.id.btn_leaderboard);
-        btn_leaderboard.setOnClickListener(this); // Set Listener to this button --> Option Button
-
-        btn_exit = (Button)findViewById(R.id.btn_exit);
-        btn_exit.setOnClickListener(this); // Set Listener to this button --> Exit Button
+        StateManager.Instance.AddState(new Leaderboardmenu());
     }
 
     @Override
@@ -61,26 +48,12 @@ public class Mainmenu extends Activity implements OnClickListener, StateBase{
         // Check if Start Button is Clicked/Touched, then after what we want to do.
         // If Start is Clicked/Touched, we go to Splashscreen.
         Intent intent = new Intent();
-        if (v == btn_start)
+        if (v == btn_back)
         {
             // Intent -> to set to another class which is another page or screen to be launched
             // Equal to change screen
-            intent.setClass(this,GamePage.class);
-            StateManager.Instance.ChangeState("MainGame"); // Default is like a loading Page
-        }
-        else if (v == btn_instruction)
-        {
-            intent.setClass(this,Instructionmenu.class);
-            StateManager.Instance.ChangeState("Instructionmenu");
-        }
-        else if (v == btn_leaderboard)
-        {
-            intent.setClass(this,Leaderboardmenu.class);
-            StateManager.Instance.ChangeState("Leaderboardmenu");
-        }
-        else if (v == btn_exit)
-        {
             intent.setClass(this,Mainmenu.class);
+            StateManager.Instance.ChangeState("Mainmenu"); // Default is like a loading Page
         }
         startActivity(intent);
         // If Exit is Clicked/Touched, we exit the app.
@@ -96,13 +69,10 @@ public class Mainmenu extends Activity implements OnClickListener, StateBase{
     public void OnExit() {}
 
     @Override
-    public void Update(float _dt){
-
-
-    }
+    public void Update(float _dt){}
 
     @Override
-    public String GetName() {return "Mainmenu";}
+    public String GetName() {return "Leaderboardmenu";}
 
     @Override
     protected void onPause()
@@ -123,4 +93,6 @@ public class Mainmenu extends Activity implements OnClickListener, StateBase{
     }
 
 
+
 }
+
