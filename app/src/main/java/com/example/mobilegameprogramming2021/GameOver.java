@@ -3,6 +3,8 @@ package com.example.mobilegameprogramming2021;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
 import android.os.Bundle;
 import android.view.SurfaceView;
 import android.view.View;
@@ -36,6 +38,10 @@ public class GameOver extends Activity implements OnClickListener, StateBase{
 
         StateManager.Instance.AddState(new GameOver());
 
+
+        GameSystem.Instance.GetScore();
+
+        RenderTextEntity.Create(); // Text Entity
     }
 
     @Override
@@ -61,7 +67,18 @@ public class GameOver extends Activity implements OnClickListener, StateBase{
     }
 
     @Override
-    public void Render(Canvas _canvas) {}
+    public void Render(Canvas _canvas)
+    {
+        EntityManager.Instance.Render(_canvas);
+
+        String scoreText = String.format("SCORE : %d", GameSystem.Instance.GetIntFromSave("Score"));
+
+        Paint paint = new Paint();
+        paint.setColor(Color.BLACK);
+        paint.setTextSize(100);
+
+        _canvas.drawText(scoreText, 50, 300, paint);
+    }
 
     @Override
     public void OnEnter(SurfaceView _view) {}

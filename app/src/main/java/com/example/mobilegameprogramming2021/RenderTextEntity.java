@@ -22,7 +22,7 @@ public class RenderTextEntity implements EntityBase{
     long lastTime = 0;
     long lastFPSTime = 0;
     float fps;
-    float Timer = 10.0f;
+    float Timer = 30.0f;
     boolean isDone;
     //Intent intent = new Intent();
 
@@ -51,6 +51,10 @@ public class RenderTextEntity implements EntityBase{
         frameCount++;
         // Update Time
         Timer -= 1 * _dt;
+        if (Timer <= 0)
+        {
+            Timer = 0;
+        }
 
         long currentTime = System.currentTimeMillis();
 

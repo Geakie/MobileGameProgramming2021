@@ -47,6 +47,14 @@ public class AudioManager {
         curr.stop();
     }
 
+    public void PauseAudio(int _id)
+    {
+        MediaPlayer curr = audioMap.get(_id);
+        curr.pause();
+
+    }
+
+
 
     // Release the resource
     public void Release()

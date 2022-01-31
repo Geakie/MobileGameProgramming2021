@@ -2,6 +2,7 @@ package com.example.mobilegameprogramming2021;
 
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
+import android.provider.MediaStore;
 import android.util.DisplayMetrics;
 import android.view.SurfaceView;
 
@@ -58,6 +59,7 @@ public class PauseButtonEntity implements EntityBase{
             if (Collision.SphereToSphere(TouchManager.Instance.GetPosX(), TouchManager.Instance.GetPosY(), 0.0f, xPos, yPos, imgRadius) && buttonDelay >= 0.25) {
                 Paused = true;
 
+
                 // Button got clicked show the popup dialog
                 if (PauseConfirmDialogFragment.IsShown)
                 {
@@ -84,7 +86,12 @@ public class PauseButtonEntity implements EntityBase{
 
         }
         else
+        {
             Paused = false;
+            //AudioManager.Instance.PlayAudio(R.raw.bgm, 1.0f);
+        }
+
+
     }
 
     @Override

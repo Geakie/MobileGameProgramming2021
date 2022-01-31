@@ -20,14 +20,24 @@ public class GameSystem {
     SharedPreferences sharedPref = null;
     SharedPreferences.Editor editor = null;
 
-    public Trashcan trashcaninstance = null;
+
+    public PaperEntity[] paperEntities = new PaperEntity[20];
 
 
     // Singleton Pattern : Blocks others from creating
     private GameSystem()
     {
+        for (int i = 0; i < 20; i++)
+        {
+            paperEntities[i] = new PaperEntity();
+
+        }
+
 
     }
+
+
+
 
     public void Update(float _deltaTime)
     {
@@ -46,6 +56,7 @@ public class GameSystem {
         StateManager.Instance.AddState(new Optionmenu());
         StateManager.Instance.AddState(new GameOver());
         StateManager.Instance.AddState(new PauseScreen());
+        StateManager.Instance.AddState(new Leaderboardmenu());
 
 
     }

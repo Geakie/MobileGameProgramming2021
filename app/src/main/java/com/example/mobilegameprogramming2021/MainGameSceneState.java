@@ -7,6 +7,7 @@ import android.content.res.AssetManager;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.media.MediaPlayer;
 import android.view.MotionEvent;
 import android.view.SurfaceView;
 
@@ -22,7 +23,11 @@ public class MainGameSceneState extends Activity implements StateBase {
     private PaperEntity paperEntities;
     public RenderTextEntity textEntity;
     private float xPos, yPos;
-    public float timer = 10.0f;
+    public float timer = 30.0f;
+    boolean playing;
+    int index;
+    float spawntimer;
+
 
     @Override
     public String GetName() {
@@ -37,30 +42,40 @@ public class MainGameSceneState extends Activity implements StateBase {
         RenderBackground.Create(); // Background is an entity
         RenderTextEntity.Create(); // Text Entity
         Trashcan.Create(); // Player Entity
-        PaperEntity.Create(); // Gameobject Entity 1
-        //Paperball.Create();
         PauseButtonEntity.Create(); //wk8 <-add pause button
-
-        AudioManager.Instance.PlayAudio(R.raw.bgm, 1.0f);
-
-
         for (int i = 0; i < 10; i++)
         {
             PaperEntity.Create();
         }
 
 
+
+
+
+
+        AudioManager.Instance.PlayAudio(R.raw.bgm, 1.0f);
+        playing = true;
+
+        index = 0;
+        timer = 30;
+        spawntimer = 0;
+
         GameSystem.Instance.GetScore();
         GameSystem.Instance.ResetScore();
         GameSystem.Instance.SaveEditBegin();
         GameSystem.Instance.SetIntInSave("Score", GameSystem.Instance.GetScore());
         GameSystem.Instance.SaveEditEnd();
+
     }
 
     @Override
     public void Render(Canvas _canvas)
     {
         EntityManager.Instance.Render(_canvas);
+
+
+
+
 
         String scoreText = String.format("SCORE : %d", GameSystem.Instance.GetIntFromSave("Score"));
 
@@ -76,16 +91,54 @@ public class MainGameSceneState extends Activity implements StateBase {
     public void Update(float _dt) {
         EntityManager.Instance.Update(_dt);
 
-        if (GameSystem.Instance.GetIsPaused()) return;
-
-        if (timer <= 0)
+        if (GameSystem.Instance.GetIsPaused())
         {
-            StateManager.Instance.ChangeState("Mainmenu");
+            AudioManager.Instance.PauseAudio(R.raw.bgm);
+            playing = false;
+            return;
+
         }
         else
         {
-            timer -= 1 * _dt;
+            if (playing = false)
+            {
+                AudioManager.Instance.PlayAudio(R.raw.bgm, 1.0f);
+                playing = true;
+            }
+
+            if (timer <= 0)
+            {
+                timer = 0;
+                if (EndGameDialog.IsShown)
+                {
+                    return;
+                }
+
+                EndGameDialog endgameDialog= new EndGameDialog();
+                endgameDialog.show(GamePage.Instance.getSupportFragmentManager(), "GameOverConfirm");
+
+
+            }
+            else
+            {
+                timer -= 1 * _dt;
+                spawntimer += _dt;
+                if (spawntimer >= 3)
+                {
+
+                    GameSystem.Instance.paperEntities[index].Spawn();
+
+                }
+
+
+
+            }
+
         }
+
+
+
+
 
 
         //if (TouchManager.Instance.IsDown()) {
@@ -105,7 +158,17 @@ public class MainGameSceneState extends Activity implements StateBase {
         GamePage.Instance.finish();
         AudioManager.Instance.StopAudio(R.raw.bgm);
 
+
     }
+
+    public void Spawn(){
+        PaperEntity.Create();
+        index++;
+        spawntimer = 0;
+        EndGameDialog.IsShown = false;
+
+    }
+
 
 }
 

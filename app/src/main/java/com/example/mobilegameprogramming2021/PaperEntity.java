@@ -23,6 +23,7 @@ public class PaperEntity implements EntityBase, Collidable{
     float imgradiussprite;
     private Vibrator _vibrator;
     private float SpawnTimer;
+    private boolean SetActive;
 
 
     @Override
@@ -42,9 +43,9 @@ public class PaperEntity implements EntityBase, Collidable{
 
         // Randomize a location to spawn, Y is fixed, x is random
         Random ranGen = new Random();
-        yStart = yPos = 10;
         ScreenWidth = _view.getWidth();
         ScreenHeight = _view.getHeight();
+        yPos = -1500;
         xPos = ranGen.nextInt(ScreenWidth);
 
         imgradiussprite = (float) (spritepaper.GetWidth() * 0.5);
@@ -78,7 +79,7 @@ public class PaperEntity implements EntityBase, Collidable{
         // Check if out of the screen
         if (yPos > ScreenHeight)
         {
-            yPos = 0;
+            SetIsDone(true);
             AudioManager.Instance.PlayAudio(R.raw.pointlost, 1.0f);
             //int currScore  = GameSystem.Instance.GetIntFromSave("Score");
             //currScore--;
@@ -105,6 +106,7 @@ public class PaperEntity implements EntityBase, Collidable{
     @Override
     public void Render(Canvas _canvas) {
         //wk 8=>draw sprite using xpos,ypos, must cast in int
+
         spritepaper.Render(_canvas,(int)xPos,  (int)yPos);
     }
 
@@ -131,6 +133,8 @@ public class PaperEntity implements EntityBase, Collidable{
         EntityManager.Instance.AddEntity(result, ENTITY_TYPE.ENT_PAPER); //wk8=>update ent tyep
         return result;
     }
+
+
 
     @Override
     public String GetType() {
@@ -198,8 +202,9 @@ public class PaperEntity implements EntityBase, Collidable{
     }
 
 
-    public float GetSpawnTimer(){
-        return SpawnTimer;
+    public void Spawn(){
+        SetActive = true;
+
     }
 
 }
